@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current IST Time</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 3rem;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+        .subtitle {
+            font-size: 1rem;
+            color: #d1d5db;
+            margin-bottom: 2rem;
+        }
+        #clock {
+            font-size: 3.5rem;
+            font-weight: bold;
+            font-variant-numeric: tabular-nums;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        #date {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            color: #e5e7eb;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Indian Standard Time</h1>
+        <div class="subtitle">(IST — Asia/Kolkata)</div>
+        <div id="clock">00:00:00 AM</div>
+        <div id="date">Loading date...</div>
+    </div>
+
+    <script>
+        function updateISTTime() {
+            const optionsTime = {
+                timeZone: 'Asia/Kolkata',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true
+            };
+
+            const optionsDate = {
+                timeZone: 'Asia/Kolkata',
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            };
+
+            const now = new Date();
+            
+            // Format time and date safely to India standard time regardless of user location
+            document.getElementById('clock').textContent = now.toLocaleTimeString('en-US', optionsTime);
+            document.getElementById('date').textContent = now.toLocaleDateString('en-US', optionsDate);
+        }
+
+        // Update clock every second
+        setInterval(updateISTTime, 1000);
+        
+        // Initial call to prevent 1-second blank lag
+        updateISTTime();
+    </script>
+</body>
+</html>
